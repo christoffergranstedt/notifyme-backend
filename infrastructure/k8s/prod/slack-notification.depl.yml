@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: slack-notification
-          image: us.gcr.io/notifyme-307219/slack-notification
+          image: allegany/slack-notification
           env:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-service:27017/slack-notification'
             - name: REACT_APP_URL
-              value: 'https://www.christoffergranstedt.info'
+              value: 'https://notifyme.christoffergranstedt.com'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:

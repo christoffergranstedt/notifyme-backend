@@ -19,7 +19,7 @@ spec:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-service:27017/slack-notification'
             - name: REACT_APP_URL
-              value: 'http://app.dev'
+              value: 'http://localhost:3000'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:

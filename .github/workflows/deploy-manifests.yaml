@@ -1,0 +1,19 @@
+name: Deploy Manifests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'infrastructure/k8s/prod/**'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITAL_OCEAN_TOKEN_API }}
+      - run: doctl kubernetes cluster kubeconfig save k8s-1-21-5-do-0-ams3-1636884819418
+      - run: kubectl apply -f infrastructure/k8s/prod

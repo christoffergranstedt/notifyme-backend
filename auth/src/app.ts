@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(logger('dev'))
 app.use(cookieParser())
 
-app.use('/api/accounts', routes)
+app.use('/accounts', routes)
 
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {
 	throw new NotFoundError()

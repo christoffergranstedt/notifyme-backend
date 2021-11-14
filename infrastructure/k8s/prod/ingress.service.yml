@@ -14,25 +14,25 @@ metadata:
 spec:
   tls:
   - hosts:
-    - christoffergranstedt.info
+    - notifyme.api.christoffergranstedt.com
     secretName: notifyme-app-tls
   rules:
-    - host: christoffergranstedt.info
+    - host: notifyme.api.christoffergranstedt.com
       http:
         paths:
-          - path: '/api/accounts/?(.*)'
+          - path: '/accounts/?(.*)'
             backend:
               serviceName: auth-service
               servicePort: 3000
-          - path: '/api/groups/?(.*)'
+          - path: '/groups/?(.*)'
             backend:
               serviceName: group-service
               servicePort: 3000
-          - path: '/api/events/?(.*)'
+          - path: '/events/?(.*)'
             backend:
               serviceName: event-service
               servicePort: 3000
-          - path: '/api/websocket/?(.*)'
+          - path: '/websocket/?(.*)'
             backend:
               serviceName: websocket-notification-service
               servicePort: 3000
