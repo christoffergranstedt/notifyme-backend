@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: group-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: group
+  template:
+    metadata:
+      labels:
+        app: group
+    spec:
+      containers:
+        - name: group
+          image: allegany/group
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-service:27017/group'
+            - name: REACT_APP_URL
+              value: 'http://app.dev'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-service:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'notifyme'
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: jwtt
+            - name: WEBHOOK_URL
+              value: 'http://app.dev/api/events'
+            - name: GITLAB_WEBHOOK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab-secret
+                  key: gitlab
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: group-service
+spec:
+  selector:
+    app: group
+  ports:
+    - name: group
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+

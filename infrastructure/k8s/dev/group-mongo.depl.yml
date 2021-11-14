@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: group-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: group-mongo
+  template:
+    metadata:
+      labels:
+        app: group-mongo
+    spec:
+      containers:
+        - name: group-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: group-mongo-service
+spec:
+  selector:
+    app: group-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

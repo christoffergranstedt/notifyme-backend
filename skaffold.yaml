@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infrastructure/k8s/dev*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: allegany/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'
+    - image: allegany/group
+      context: group
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'
+    - image: allegany/event
+      context: event
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'
+    - image: allegany/logging
+      context: logging
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'
+    - image: allegany/slack-notification
+      context: slack-notification
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'
+    - image: allegany/websocket-notification
+      context: websocket-notification
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: '.'

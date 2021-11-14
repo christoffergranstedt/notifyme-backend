@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event
+  template:
+    metadata:
+      labels:
+        app: event
+    spec:
+      containers:
+        - name: event
+          image: us.gcr.io/notifyme-307219/event
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-service:27017/event'
+            - name: REACT_APP_URL
+              value: 'https://www.christoffergranstedt.info'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'https://nats-service:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'notifyme'
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: jwtt
+            - name: WEBHOOK_URL
+              value: 'https://www.christoffergranstedt.info/api/events'
+            - name: GITLAB_WEBHOOK_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: gitlab-secret
+                  key: gitlab
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-service
+spec:
+  selector:
+    app: event
+  ports:
+    - name: event
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+

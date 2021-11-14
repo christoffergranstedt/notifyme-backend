@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-notification-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slack-notification
+  template:
+    metadata:
+      labels:
+        app: slack-notification
+    spec:
+      containers:
+        - name: slack-notification
+          image: us.gcr.io/notifyme-307219/slack-notification
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-service:27017/slack-notification'
+            - name: REACT_APP_URL
+              value: 'https://www.christoffergranstedt.info'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'https://nats-service:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'notifyme'
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: jwtt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: slack-notification-service
+spec:
+  selector:
+    app: slack-notification
+  ports:
+    - name: slack-notification
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+

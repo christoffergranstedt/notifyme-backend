@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging
+  template:
+    metadata:
+      labels:
+        app: logging
+    spec:
+      containers:
+        - name: logging
+          image: us.gcr.io/notifyme-307219/logging
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-service:27017/logging'
+            - name: REACT_APP_URL
+              value: 'https://www.christoffergranstedt.info'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-service:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'notifyme'
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: jwtt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-service
+spec:
+  selector:
+    app: logging
+  ports:
+    - name: logging
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+
+

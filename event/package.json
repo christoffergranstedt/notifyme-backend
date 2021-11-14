@@ -1,0 +1,25 @@
+{
+  "name": "event",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node-dev src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@granch_web/common": "^1.0.45",
+    "@types/cors": "^2.8.12",
+    "@types/mongoose": "^5.11.96",
+    "@types/morgan": "^1.9.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "node-nats-streaming": "^0.3.2",
+    "ts-node-dev": "^1.1.8"
+  }
+}
