@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: group
-          image: us.gcr.io/notifyme-307219/group
+          image: allegany/group
           env:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-service:27017/group'
             - name: REACT_APP_URL
-              value: 'https://www.christoffergranstedt.info'
+              value: 'https://notifyme.christoffergranstedt.com'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
@@ -34,7 +34,7 @@ spec:
                   name: jwt-secret
                   key: jwtt
             - name: WEBHOOK_URL
-              value: 'https://www.christoffergranstedt.info/api/events'
+              value: 'https://notifyme.api.christoffergranstedt.com/api/events'
             - name: GITLAB_WEBHOOK_TOKEN
               valueFrom:
                 secretKeyRef:

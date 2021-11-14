@@ -19,7 +19,7 @@ spec:
             - name: MONGO_URI
               value: 'mongodb://auth-mongo-service:27017/auth'
             - name: REACT_APP_URL
-              value: 'http://app.dev'
+              value: 'http://localhost:3000'
             - name: GITLAB_APP_ID
               value: '9d0041db3e685b41a679edb646339b7da355ebebbe59edc0e86f382c7da7f840'
             - name: GITLAB_APP_SECRET

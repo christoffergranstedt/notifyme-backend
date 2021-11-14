@@ -14,7 +14,7 @@ app.use(cors({ origin: process.env.REACT_APP_URL }))
 app.use(express.json())
 app.use(logger('dev'))
 
-app.use('/api/groups', routes)
+app.use('/groups', routes)
 
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {
 	throw new NotFoundError()
