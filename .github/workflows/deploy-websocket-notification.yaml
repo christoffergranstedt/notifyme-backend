@@ -1,0 +1,25 @@
+name: Deploy Websocket Notification
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'websocket-notification/**'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd websocker-notification && docker build -t allegany/websocker-notification .
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker push allegany/slack-notification
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITAL_OCEAN_TOKEN_API }}
+      - run: doctl kubernetes cluster kubeconfig save k8s-1-21-5-do-0-ams3-1636884819418
+      - run: kubectl rollout restart deployment slack-notification-depl
