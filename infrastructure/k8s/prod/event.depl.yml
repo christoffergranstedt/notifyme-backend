@@ -34,7 +34,7 @@ spec:
                   name: jwt-secret
                   key: jwtt
             - name: WEBHOOK_URL
-              value: 'https://notifyme.api.christoffergranstedt.com/api/events'
+              value: 'https://www.christoffergranstedt.info/events'
             - name: GITLAB_WEBHOOK_TOKEN
               valueFrom:
                 secretKeyRef:

@@ -14,9 +14,8 @@ metadata:
 spec:
   tls:
   - hosts:
-    - notifyme.api.christoffergranstedt.com
+    - www.christoffergranstedt.info
   rules:
-    - host: notifyme.api.christoffergranstedt.com
       http:
         paths:
           - path: '/accounts/?(.*)'
@@ -41,7 +40,7 @@ kind: Service
 metadata:
   annotations:
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: 'true'
-    service.beta.kubernetes.io/do-loadbalancer-hostname: 'notifyme.api.christoffergranstedt.com'
+    service.beta.kubernetes.io/do-loadbalancer-hostname: 'www.christoffergranstedt.info'
   labels:
     helm.sh/chart: ingress-nginx-2.0.3
     app.kubernetes.io/name: ingress-nginx

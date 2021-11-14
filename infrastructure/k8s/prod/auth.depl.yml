@@ -25,13 +25,13 @@ spec:
             - name: GITLAB_APP_SECRET
               value: 'f2a19a4d26f28d43c5c935e2019ee8c90196a47c08677d86cd199a191b9afe69'
             - name: GITLAB_REDIRECT_URI
-              value: 'https://notifyme.api.christoffergranstedt.com/api/accounts/gitlab/authenticate/callback'
+              value: 'https://www.christoffergranstedt.info/accounts/gitlab/authenticate/callback'
             - name: SLACK_APP_ID
               value: '1753167503735.1753174200439'
             - name: SLACK_APP_SECRET
               value: '060bbf29314ed52bda0c507a5fa53328'
             - name: SLACK_REDIRECT_URI
-              value: 'https://notifyme.api.christoffergranstedt.com/api/accounts/slack/authenticate/callback'
+              value: 'https://www.christoffergranstedt.info/accounts/slack/authenticate/callback'
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
