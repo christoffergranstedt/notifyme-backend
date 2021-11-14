@@ -11,6 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/websocket-services: "websocket-notification-service"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+spec:
   rules:
     - host: www.christoffergranstedt.info
       http:
