@@ -11,29 +11,26 @@ metadata:
     nginx.ingress.kubernetes.io/websocket-services: "websocket-notification-service"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
-spec:
-  tls:
-  - hosts:
-    - www.christoffergranstedt.info
   rules:
-    http:
-      paths:
-        - path: '/accounts/?(.*)'
-          backend:
-            serviceName: auth-service
-            servicePort: 3000
-        - path: '/groups/?(.*)'
-          backend:
-            serviceName: group-service
-            servicePort: 3000
-        - path: '/events/?(.*)'
-          backend:
-            serviceName: event-service
-            servicePort: 3000
-        - path: '/websocket/?(.*)'
-          backend:
-            serviceName: websocket-notification-service
-            servicePort: 3000
+    - host: www.christoffergranstedt.info
+      http:
+        paths:
+          - path: '/accounts/?(.*)'
+            backend:
+              serviceName: auth-service
+              servicePort: 3000
+          - path: '/groups/?(.*)'
+            backend:
+              serviceName: group-service
+              servicePort: 3000
+          - path: '/events/?(.*)'
+            backend:
+              serviceName: event-service
+              servicePort: 3000
+          - path: '/websocket/?(.*)'
+            backend:
+              serviceName: websocket-notification-service
+              servicePort: 3000
 ---
 apiVersion: v1
 kind: Service
