@@ -22,7 +22,7 @@ const startServer = async () => {
 		mongooseDB.connect()
 		
   } catch (err) {
-    console.error(err.message)
+    console.error(err)
   }
 
 	if (!httpServer) return

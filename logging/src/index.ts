@@ -15,7 +15,7 @@ const startServer = async () => {
 		await mongooseDB.connect()
 		await nats.connect()
   } catch (err) {
-    console.error(err.message)
+    console.error(err)
   }
 
 	server = app.listen(3000, () => {

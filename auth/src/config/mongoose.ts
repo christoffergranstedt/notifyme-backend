@@ -9,12 +9,7 @@ const connect = async () => {
   mongoose.connection.on('disconnected', () => closeServer('Mongo DB is disconnected'))
   mongoose.connection.on('error', error => closeServer(error.message))
 
-  return mongoose.connect(process.env.MONGO_URI, {
-    connectTimeoutMS: 10000,
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+	mongoose.connect(process.env.MONGO_URI, { socketTimeoutMS: 10000 })
 }
 
 const close = () => {

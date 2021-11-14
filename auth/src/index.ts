@@ -1,5 +1,4 @@
 /* eslint-disable import/first */
-import { ProcessesEvent } from '@granch_web/common'
 import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
@@ -7,6 +6,7 @@ import 'express-async-errors'
 import { app } from './app'
 import { mongooseDB } from './config/mongoose'
 import { nats } from './config/natsStreaming'
+import { ProcessesEvent } from '@granch_web/common'
 
 let server: any
 
